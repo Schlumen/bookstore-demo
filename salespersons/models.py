@@ -1,0 +1,14 @@
+from django.db import models
+from django.contrib.auth.models import User # Needed for OneToOneField
+
+# Create your models here.
+
+class Salesperson(models.Model):
+	username = models.OneToOneField(User, on_delete=models.CASCADE)
+	name = models.CharField(max_length=120)
+	bio = models.TextField(default="no bio...")
+	pic = models.ImageField(upload_to="salespersons", default="no_image.jpg")
+
+	def __str__(self):
+		return f"Profile of {self.user.username}"
+		# f-string allows to format the string, so for username abc, you will see: Profile of abc 
